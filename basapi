@@ -1,0 +1,376 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BAS api",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://"
+    }
+  ],
+  "security": [
+    {
+      "basic": []
+    }
+  ],
+  "paths": {
+    "/brands": {
+      "post": {
+        "tags": [
+          "Brands"
+        ],
+        "operationId": "addBrand",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BrandInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "add brand"
+          }
+        }
+      }
+    },
+    "/countryRegistration": {
+      "post": {
+        "tags": [
+          "CountryRegistration"
+        ],
+        "operationId": "addCountryRegistration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CountryRegistrationInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "add country registration"
+          }
+        }
+      }
+    },
+    "/properties": {
+      "post": {
+        "tags": [
+          "Properties"
+        ],
+        "operationId": "addProperty",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PropertyInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "add property"
+          }
+        }
+      }
+    },
+    "/propertyValues": {
+      "post": {
+        "tags": [
+          "PropertyValues"
+        ],
+        "operationId": "addPropertyValue",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PropertyValueInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "add property value"
+          }
+        }
+      }
+    },
+    "/products": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "addProduct",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "add product"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BrandInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 123
+          },
+          "nameRu": {
+            "type": "string",
+            "example": "MANN-FILTER"
+          },
+          "nameUk": {
+            "type": "string",
+            "example": "MANN-FILTER"
+          },
+          "analogousNames": {
+            "type": "array",
+            "example": [
+              "Mann Filter",
+              "MANN-FILTERN"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CountryRegistrationInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 60
+          },
+          "countryRegistrationRu": {
+            "type": "string",
+            "example": "Нидерланды"
+          },
+          "countryRegistrationUk": {
+            "type": "string",
+            "example": "Нідерланди"
+          }
+        }
+      },
+      "PropertyInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 436
+          },
+          "nameRu": {
+            "type": "string",
+            "example": "Динамика тормоза / движения"
+          },
+          "nameUk": {
+            "type": "string",
+            "example": "Динаміка гальмування/руху за основним артикулом"
+          }
+        }
+      },
+      "PropertyValueInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1132
+          },
+          "propertyId": {
+            "type": "integer",
+            "example": 436
+          },
+          "nameRu": {
+            "type": "string",
+            "example": "для противоблокировочного устройства"
+          },
+          "nameUk": {
+            "type": "string",
+            "example": "для ABS"
+          }
+        }
+      },
+      "ProductInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 123
+          },
+          "code": {
+            "type": "string",
+            "example": "9031"
+          },
+          "name": {
+            "$ref": "#/components/schemas/ProductInfo_name"
+          },
+          "description": {
+            "$ref": "#/components/schemas/ProductInfo_description"
+          },
+          "images": {
+            "type": "array",
+            "example": [
+              "https://auto-mechanic.parts/api/images/products/2cd595c1f4f714996fa637816545703e6fc309b9-63f20e0.jpeg",
+              "https://auto-mechanic.parts/api/images/products/2cd595c1f4f714996fa637816545703e6fc309a7-63f20e0.jpeg"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "brandId": {
+            "type": "integer",
+            "example": 123
+          },
+          "countryRegistrationId": {
+            "type": "integer",
+            "example": 60
+          },
+          "published": {
+            "type": "boolean",
+            "example": true
+          },
+          "altCodes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "ABS9031"
+            }
+          },
+          "crosses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductInfo_crosses"
+            }
+          },
+          "oemNumbers": {
+            "type": "array",
+            "example": [
+              {
+                "code": "4406000QAG",
+                "brandId": 1483,
+                "author": "string",
+                "isActivate": true
+              },
+              {
+                "code": "7701 205 523",
+                "brandId": 1544,
+                "author": "string",
+                "isActivate": true
+              }
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ProductInfo_oemNumbers"
+            }
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductInfo_properties"
+            }
+          }
+        }
+      },
+      "ProductInfo_name": {
+        "type": "object",
+        "properties": {
+          "ru": {
+            "type": "string",
+            "example": "Барабанные тормозные колодки (задние) d=203x38mm"
+          },
+          "uk": {
+            "type": "string",
+            "example": "Барабанні гальмівні колодки (задні) d=203x38mm"
+          }
+        }
+      },
+      "ProductInfo_description": {
+        "type": "object",
+        "properties": {
+          "ru": {
+            "type": "string"
+          },
+          "uk": {
+            "type": "string"
+          }
+        }
+      },
+      "ProductInfo_crosses": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "8749"
+          },
+          "isActivate": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string"
+          }
+        }
+      },
+      "ProductInfo_oemNumbers": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "brandId": {
+            "type": "integer"
+          },
+          "author": {
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ProductInfo_properties": {
+        "type": "object",
+        "properties": {
+          "unique": {
+            "type": "integer"
+          },
+          "nameId": {
+            "type": "integer"
+          },
+          "valueId": {
+            "type": "integer"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "example": "[{\"unique\":46155,\"nameId\":672,\"valueId\":21,\"isActive\":true},{\"unique\":27158,\"nameId\":100,\"valueId\":106,\"isActive\":true}]"
+      }
+    },
+    "securitySchemes": {
+      "basic": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  }
+}
